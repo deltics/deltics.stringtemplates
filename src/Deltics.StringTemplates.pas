@@ -54,7 +54,6 @@ interface
     TTemplatePart = class;
     TStringTemplate = class;
 
-
     TTemplatePartType = (
                          ptLiteral,
                          ptStringVar,
@@ -359,6 +358,7 @@ implementation
     varMutexMark: Integer;
     varLength: Integer;
     mutex: Boolean;
+    partType: TTemplatePartType;
   begin
     if (fText = aValue) then
       EXIT;
@@ -423,15 +423,17 @@ implementation
 
           stype := STR.Trim(stype);
           case STR.IndexOf(stype, ['string', 'str', 'guid', 'integer', 'int']) of
-            0, 1: AddPart(ptStringVar, svar, varLength, mutex);
-            2   : AddPart(ptGUIDVar, svar, varLength, mutex);
-            3, 4: AddPart(ptIntegerVar, svar, varLength, mutex);
+            0, 1: partType := ptStringVar;
+            2   : partType := ptGUIDVar;
+            3, 4: partType := ptIntegerVar;
           else
             raise Exception.CreateFmt('Invalid part type specified (%s) in string template (''%s'') at %d', [stype, aValue, varStart]);
           end;
         end
         else
-          AddPart(ptStringVar, svar, varLength, mutex);
+          partType := ptStringVar;
+
+        AddPart(partType, svar, varLength, mutex);
 
         if (varMutexMark > 0) then
           mutex := TRUE;

@@ -1,0 +1,23 @@
+{
+  "id":"deltics.stringtemplates",
+  "version":"",
+  "summary":"A string matching library that uses a simple system of (optionally typed) tokens interspersed with fixed markers in strings to provide a much simpler alternative to regex that is more easily reasoned about but which can be used in many (if not most) cases where regex would otherwise be used.",
+  "tags":[
+    "deltics",
+    "strings"
+  ],
+  "copyright":"\u00a92019 Jolyon Direnko-Smith",
+  "language":"en",
+  "content":"source",
+  "dependencies":[
+    "deltics.inc:1.3.0",
+    "deltics.guids:1.0.0",
+    "deltics.strings:2.0.0"
+  ],
+  "source":{
+      "files":[
+        "src\\deltics.stringtemplates.inc",
+        "src\\Deltics.StringTemplates.pas"
+      ]
+    }
+}
